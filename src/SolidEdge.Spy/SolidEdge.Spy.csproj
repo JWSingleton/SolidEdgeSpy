@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B091F62-9A48-4FE4-B994-392E24A25E8C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SolidEdge.Spy</RootNamespace>
+    <AssemblyName>spyse</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>C:\deploy\solidedgespy\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://solidedgespy.codeplex.com/releases/clickonce/</InstallUrl>
+    <SupportUrl>http://solidedgespy.codeplex.com</SupportUrl>
+    <ProductName>Spy for Solid Edge</ProductName>
+    <PublisherName>Jason Newell</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.1.0.1</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>sespy.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C0165B644291FC41774CC98C24DA83B1DF787E10</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SolidEdge.Spy_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Forms\ComPropertyGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ComPropertyGrid.Designer.cs">
+      <DependentUpon>ComPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ComTypeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\ComTypeTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\GlobalParameterBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\GlobalParameterBrowser.Designer.cs">
+      <DependentUpon>GlobalParameterBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NavigationController.cs" />
+    <Compile Include="Forms\ObjectViewProxy.cs" />
+    <Compile Include="Forms\ProcessBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessBrowser.Designer.cs">
+      <DependentUpon>ProcessBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessModuleListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolStripSpringTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\TypeBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TypeBrowser.Designer.cs">
+      <DependentUpon>TypeBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalExceptionHandler.cs" />
+    <Compile Include="InteropServices\ComImplementedTypeInfo.cs" />
+    <Compile Include="InteropServices\ComPtr.cs" />
+    <Compile Include="InteropServices\IconTools.cs" />
+    <Compile Include="InteropServices\IFixedTypeInfo.cs" />
+    <Compile Include="InteropServices\MarshalEx.cs" />
+    <Compile Include="InteropServices\Variant.cs" />
+    <Compile Include="TypeLibGuid.cs" />
+    <Compile Include="InteropServices\ComTypeManager.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryIDs.cs" />
+    <Compile Include="CommandHelper.cs" />
+    <Compile Include="Forms\ObjectBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ObjectBrowser.Designer.cs">
+      <DependentUpon>ObjectBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EventMonitor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\EventMonitor.Designer.cs">
+      <DependentUpon>EventMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SolidEdgeExtensions.cs" />
+    <Compile Include="Forms\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\TabControlEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\TypeInfoRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Forms\ComTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
+    <Compile Include="InteropServices\ComHelper.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="InteropServices\ComMemberInfo.cs" />
+    <Compile Include="InteropServices\ComTypeInfo.cs" />
+    <Compile Include="InteropServices\ComTypeLibrary.cs" />
+    <Compile Include="InteropServices\IDispatchExtensions.cs" />
+    <Compile Include="InteropServices\IntPtrExtensions.cs" />
+    <Compile Include="InteropServices\ITypeInfoExtensions.cs" />
+    <Compile Include="InteropServices\ITypeLibExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="InteropServices\IMessageFilter.cs" />
+    <Compile Include="InteropServices\IDispatch.cs" />
+    <Compile Include="InteropServices\NativeMethods.cs" />
+    <Compile Include="Forms\NativeMethods.cs" />
+    <Compile Include="InteropServices\OleMessageFilter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ComPropertyGrid.resx">
+      <DependentUpon>ComPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GlobalParameterBrowser.resx">
+      <DependentUpon>GlobalParameterBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessBrowser.resx">
+      <DependentUpon>ProcessBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TypeBrowser.resx">
+      <DependentUpon>TypeBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ObjectBrowser.resx">
+      <DependentUpon>ObjectBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EventMonitor.resx">
+      <DependentUpon>EventMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="SolidEdge.Spy_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Media\FolderClosed_16x16.png" />
+    <None Include="Media\FolderOpen_16x16.png" />
+    <None Include="Media\ComTreeItemBlue_16x16.png" />
+    <None Include="Media\ComTreeItemGray_16x16.png" />
+    <None Include="Media\ComTreeItemsBlue_16x16.png" />
+    <None Include="Media\ComTreeItemsGray_16x16.png" />
+    <None Include="Media\sespy_128x128.png" />
+    <None Include="Notes.txt" />
+    <None Include="Media\Collapse_16x16.png" />
+    <None Include="Media\Expand_16x16.png" />
+    <None Include="Media\Event_16x16.png" />
+    <None Include="Media\Erase_16x16.png" />
+    <None Include="Media\Refresh_16x16.png" />
+    <None Include="Media\Parameter_16x16.png" />
+    <None Include="Media\Namespace_16x16.png" />
+    <None Include="Media\Library_16x16.png" />
+    <None Include="Media\Interface_16x16.png" />
+    <None Include="Media\Alias_16x16.png" />
+    <None Include="Media\Method_16x16.png" />
+    <None Include="Media\Property_16x16.png" />
+    <None Include="Media\Constant_16x16.png" />
+    <None Include="Media\Class_16x16.png" />
+    <None Include="Media\Enum_16x16.png" />
+    <None Include="Media\ArrowBack_16x16.png" />
+    <None Include="Media\ArrowForward_16x16.png" />
+    <None Include="Media\Structure_16x16.png" />
+    <None Include="Media\Find_16x16.png" />
+    <None Include="Media\ClearSearch_16x16.png" />
+    <None Include="Media\ProcessModules_16x16.png" />
+    <Content Include="sespy.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SolidEdgeConstants">
+      <Guid>{C467A6F5-27ED-11D2-BE30-080036B4D502}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="SolidEdgeFramework">
+      <Guid>{8A7EFA3A-F000-11D1-BDFC-080036B4D502}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

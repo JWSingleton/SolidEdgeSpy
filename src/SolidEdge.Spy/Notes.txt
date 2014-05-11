@@ -1,0 +1,7 @@
+﻿[ClickOnce Releases]
+http://blogs.msdn.com/b/codeplex/archive/2010/07/13/clickonce-releases.aspx
+
+[IDispatch (IWastedTimeOnThis but ILearntLots)]
+http://www.productiverage.com/idispatch-iwastedtimeonthis-but-ilearntlots
+
+atlcomcli.h
