@@ -2,6 +2,7 @@
 using SolidEdge.Spy.Forms;
 using SolidEdge.Spy.InteropServices;
 using SolidEdge.Spy.Properties;
+using SolidEdgeCommunity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace SolidEdge.Spy
         private Dictionary<IConnectionPoint, int> _connectionPoints = new Dictionary<IConnectionPoint, int>();
         private ConcurrentQueue<SolidEdge.Spy.Forms.EventMonitorItem> _eventQueue = new ConcurrentQueue<Forms.EventMonitorItem>();
         private static AutoResetEvent _uiAutoResetEvent = new AutoResetEvent(false);
+        private ConnectionPointController _connectionPointController;
 
         const int TabPageObjectBrowserIndex = 0;
         const int TabPageTypeBrowserIndex = 1;
@@ -36,6 +38,7 @@ namespace SolidEdge.Spy
         {
             this.Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
+            _connectionPointController = new ConnectionPointController(this);
         }
 
         private void Application_Load(object sender, EventArgs e)
@@ -91,6 +94,14 @@ namespace SolidEdge.Spy
             }
 
             eventMonitor.LogEvents(items.ToArray());
+
+            if (_application != null)
+            {
+                if (commandBrowser.ActiveEnvironment == null)
+                {
+                    commandBrowser.ActiveEnvironment = _application.GetActiveEnvironment();
+                }
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -248,7 +259,7 @@ namespace SolidEdge.Spy
                 if (MarshalEx.Succeeded(MarshalEx.GetActiveObject("SolidEdge.Application", out pApplication)))
                 {
                     _application = pApplication.TryGetUniqueRCW<SolidEdgeFramework.Application>();
-                    HookEvents(_application, typeof(SolidEdgeFramework.ISEApplicationEvents).GUID);
+                    _connectionPointController.AdviseSink<SolidEdgeFramework.ISEApplicationEvents>(_application);
 
                     globalParameterBrowser.RefreshGlobalParameters();
 
@@ -273,7 +284,7 @@ namespace SolidEdge.Spy
 
         private void DisconnectFromSolidEdge(bool resetStartupTimer)
         {
-            UnhookEvents();
+            _connectionPointController.UnadviseAllSinks();
 
             HandleAutoResetEvent();
 
@@ -322,6 +333,8 @@ namespace SolidEdge.Spy
                 GlobalExceptionHandler.HandleException();
             }
         }
+
+        public SolidEdgeFramework.Application Application { get { return _application; } }
 
         #region SolidEdgeFramework.ISEApplicationEvents
 
@@ -482,11 +495,23 @@ namespace SolidEdge.Spy
             string environmentName = String.Empty;
             string environmentCaption = String.Empty;
             string environmentCATID = String.Empty;
+            SolidEdgeFramework.Environment environment = null;
 
             try
             {
-                SolidEdgeFramework.Environment environment = _application.GetActiveEnvironment();
+                environment = _application.GetActiveEnvironment();
                 environment.GetInfo(out environmentName, out environmentCaption, out environmentCATID);
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                commandBrowser.BeginInvokeIfRequired(ctl =>
+                {
+                    ctl.ActiveEnvironment = environment;
+                });
             }
             catch
             {
@@ -803,55 +828,6 @@ namespace SolidEdge.Spy
             }
 
             _eventQueue.Enqueue(new Forms.EventMonitorItem(eventString, environmentName, environmentCaption, environmentCATID));
-        }
-
-        #endregion
-
-        #region "Event hooking-unhooking"
-
-        private void HookEvents(object source, Guid eventGuid)
-        {
-            IConnectionPointContainer connectionPointContainer = null;
-            IConnectionPoint connectionPoint = null;
-            int cookie = 0;
-
-            connectionPointContainer = source as IConnectionPointContainer;
-            if (connectionPointContainer != null)
-            {
-                connectionPointContainer.FindConnectionPoint(eventGuid, out connectionPoint);
-                if (connectionPoint != null)
-                {
-                    connectionPoint.Advise(this, out cookie);
-                    if (cookie != 0)
-                    {
-                        _connectionPoints.Add(connectionPoint, cookie);
-                    }
-                    else
-                    {
-                        throw new System.Exception("Advisory connection between the connection point and the caller's sink object failed.");
-                    }
-                }
-                else
-                {
-                    throw new System.Exception(String.Format("Connection point '{0}' not found.", eventGuid));
-                }
-            }
-            else
-            {
-                throw new System.Exception("Source does not implement IConnectionPointContainer.");
-            }
-        }
-
-        private void UnhookEvents()
-        {
-            Dictionary<IConnectionPoint, int>.Enumerator enumerator = _connectionPoints.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                enumerator.Current.Key.Unadvise(enumerator.Current.Value);
-            }
-
-            _connectionPoints.Clear();
         }
 
         #endregion

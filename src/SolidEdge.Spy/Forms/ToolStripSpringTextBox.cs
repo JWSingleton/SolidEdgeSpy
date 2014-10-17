@@ -23,6 +23,10 @@ namespace SolidEdge.Spy.Forms
             {
                 this.Text = String.Empty;
             }
+            else if (this.Text.Equals("<Filter>"))
+            {
+                this.Text = String.Empty;
+            }
 
             base.OnGotFocus(e);
         }

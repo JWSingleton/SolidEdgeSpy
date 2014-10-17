@@ -142,6 +142,102 @@ namespace SolidEdge.Spy.Extensions
             catid = environment.CATID;
         }
 
+        public static Type GetCommandType(this SolidEdgeFramework.Environment environment)
+        {
+            var guid = environment.GetGuid();
+
+            if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Application))
+            {
+                return typeof(SolidEdgeConstants.SolidEdgeCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Assembly))
+            {
+                return typeof(SolidEdgeConstants.AssemblyCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.DMAssembly))
+            {
+                return typeof(SolidEdgeConstants.AssemblyCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.CuttingPlaneLine))
+            {
+                return typeof(SolidEdgeConstants.CuttingPlaneLineCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Draft))
+            {
+                return typeof(SolidEdgeConstants.DetailCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.DrawingViewEdit))
+            {
+                return typeof(SolidEdgeConstants.DrawingViewEditCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Explode))
+            {
+                return typeof(SolidEdgeConstants.ExplodeCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Layout))
+            {
+                return typeof(SolidEdgeConstants.LayoutCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Sketch))
+            {
+                return typeof(SolidEdgeConstants.LayoutInPartCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Motion))
+            {
+                return typeof(SolidEdgeConstants.MotionCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Part))
+            {
+                return typeof(SolidEdgeConstants.PartCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.DMPart))
+            {
+                return typeof(SolidEdgeConstants.PartCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Profile))
+            {
+                return typeof(SolidEdgeConstants.ProfileCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.ProfileHole))
+            {
+                return typeof(SolidEdgeConstants.ProfileHoleCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.ProfilePattern))
+            {
+                return typeof(SolidEdgeConstants.ProfilePatternCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.ProfileRevolved))
+            {
+                return typeof(SolidEdgeConstants.ProfileRevolvedCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.SheetMetal))
+            {
+                return typeof(SolidEdgeConstants.SheetMetalCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.SheetMetal))
+            {
+                return typeof(SolidEdgeConstants.SheetMetalCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Simplify))
+            {
+                return typeof(SolidEdgeConstants.SimplifyCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Studio))
+            {
+                return typeof(SolidEdgeConstants.StudioCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.XpresRoute))
+            {
+                return typeof(SolidEdgeConstants.TubingCommandConstants);
+            }
+            else if (guid.Equals(SolidEdgeSDK.EnvironmentCategories.Weldment))
+            {
+                return typeof(SolidEdgeConstants.WeldmentCommandConstants);
+            }
+
+            return null;
+        }
+
         #endregion
     }
 }

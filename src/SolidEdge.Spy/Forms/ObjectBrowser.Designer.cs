@@ -37,10 +37,11 @@
             this.buttonNullObjects = new System.Windows.Forms.ToolStripButton();
             this.buttonEmptyCollection = new System.Windows.Forms.ToolStripButton();
             this.buttonProperties = new System.Windows.Forms.ToolStripButton();
+            this.buttonMethods = new System.Windows.Forms.ToolStripButton();
             this.separatorNavigation = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainerInner = new System.Windows.Forms.SplitContainer();
             this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
-            this.buttonMethods = new System.Windows.Forms.ToolStripButton();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.comTreeView = new SolidEdge.Spy.Forms.ComTreeView();
             this.typeInfoRichTextBox = new SolidEdge.Spy.Forms.TypeInfoRichTextBox();
             this.comPropertyGrid = new SolidEdge.Spy.Forms.ComPropertyGrid();
@@ -128,6 +129,16 @@
             this.buttonProperties.ToolTipText = "Show Properties";
             this.buttonProperties.Click += new System.EventHandler(this.buttonProperties_Click);
             // 
+            // buttonMethods
+            // 
+            this.buttonMethods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonMethods.Image = global::SolidEdge.Spy.Properties.Resources.Method_16x16;
+            this.buttonMethods.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonMethods.Name = "buttonMethods";
+            this.buttonMethods.Size = new System.Drawing.Size(23, 22);
+            this.buttonMethods.Text = "Show Methods";
+            this.buttonMethods.Click += new System.EventHandler(this.buttonMethods_Click);
+            // 
             // separatorNavigation
             // 
             this.separatorNavigation.Name = "separatorNavigation";
@@ -169,19 +180,17 @@
             this.splitContainerOuter.SplitterDistance = 242;
             this.splitContainerOuter.TabIndex = 3;
             // 
-            // buttonMethods
+            // contextMenuStrip
             // 
-            this.buttonMethods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonMethods.Image = global::SolidEdge.Spy.Properties.Resources.Method_16x16;
-            this.buttonMethods.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonMethods.Name = "buttonMethods";
-            this.buttonMethods.Size = new System.Drawing.Size(23, 22);
-            this.buttonMethods.Text = "Show Methods";
-            this.buttonMethods.Click += new System.EventHandler(this.buttonMethods_Click);
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(153, 26);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.contextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_ItemClicked);
             // 
             // comTreeView
             // 
             this.comTreeView.BackColor = System.Drawing.SystemColors.Window;
+            this.comTreeView.ContextMenuStrip = this.contextMenuStrip;
             this.comTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
             this.comTreeView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -268,5 +277,6 @@
         private ComPropertyGrid comPropertyGrid;
         private System.Windows.Forms.ToolStripButton buttonProperties;
         private System.Windows.Forms.ToolStripButton buttonMethods;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }

@@ -55,10 +55,34 @@ namespace SolidEdge.Spy.Forms
     public class GlobalParameterInfo : ICustomTypeDescriptor, IDisposable
     {
         private ComPtr _pApplication = IntPtr.Zero;
+        private List<SolidEdgeFramework.ApplicationGlobalConstants> _colorGlobalConstants = new List<SolidEdgeFramework.ApplicationGlobalConstants>();
 
         public GlobalParameterInfo(ComPtr pApplication)
         {
             _pApplication = pApplication;
+
+            try
+            {
+                var type = typeof(SolidEdgeFramework.ApplicationGlobalConstants);
+                var enumNames = type.GetEnumNames();
+                var enumValues = type.GetEnumValues();
+
+                // Build list of global constants that represent color using the constant name.
+                for (int i = 0; i < enumNames.Length; i++)
+                {
+                    if (enumNames[i].Contains("Color"))
+                    {
+                        _colorGlobalConstants.Add((SolidEdgeFramework.ApplicationGlobalConstants)enumValues.GetValue(i));
+                    }
+                }
+
+                // These don't have "Color" in their name but are colors. Add manually to list.
+                _colorGlobalConstants.Add(SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalInside);
+                _colorGlobalConstants.Add(SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalInsideOutside);
+            }
+            catch
+            {
+            }
         }
 
         #region "TypeDescriptor Implementation"
@@ -113,42 +137,76 @@ namespace SolidEdge.Spy.Forms
 
                                     try
                                     {
-                                        switch (globalConst)
+                                        if (_colorGlobalConstants.Contains(globalConst))
                                         {
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionEdge:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionCenterline:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionRegion:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionOpacity:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab1:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab2:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorActive:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorBackground:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorConstruction:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorDisabled:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorFailed:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHandle:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHighlight:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorProfile:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSelected:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheet:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalOverlayColor:
-                                            case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorRefPlane:
-                                                if (args[1] is int)
-                                                {
-                                                    ; byte[] rgb = BitConverter.GetBytes((int)args[1]);
-                                                    Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]);
+                                            var color = Color.Empty;
 
-                                                    description = new StringBuilder();
-                                                    description.AppendLine(property.Description);
-                                                    description.AppendLine("byte[] rgb = BitConverter.GetBytes((int)value)");
-                                                    description.AppendLine("Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]");
+                                            if (args[1] is int)
+                                            {
+                                                byte[] rgb = BitConverter.GetBytes((int)args[1]);
+                                                color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]);
+                                            }
+                                            else if (args[1] is uint)
+                                            {
+                                                byte[] rgb = BitConverter.GetBytes((uint)args[1]);
+                                                color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]);
+                                            }
+                                            else
+                                            {
+#if DEBUG
+                                                //System.Diagnostics.Debugger.Break();
+#endif
+                                            }
 
-                                                    property = new GlobalParameterProperty(String.Format("{0} (converted to color)", property.Name), description.ToString(), color, color.GetType(), true);
+                                            if (color.IsEmpty == false)
+                                            {
+                                                description = new StringBuilder();
+                                                description.AppendLine(property.Description);
+                                                description.AppendLine("byte[] rgb = BitConverter.GetBytes((int)value)");
+                                                description.AppendLine("Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]");
 
-                                                    list.Add(new GlobalParameterPropertyDescriptor(ref property, attributes));
-                                                }
-                                                break;
+                                                property = new GlobalParameterProperty(String.Format("{0} (converted to color)", property.Name), description.ToString(), color, color.GetType(), true);
+
+                                                list.Add(new GlobalParameterPropertyDescriptor(ref property, attributes));
+                                            }
                                         }
+
+                                        //switch (globalConst)
+                                        //{
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionEdge:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionCenterline:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionRegion:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionOpacity:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab1:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab2:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorActive:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorBackground:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorConstruction:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorDisabled:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorFailed:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHandle:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHighlight:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorProfile:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSelected:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheet:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalOverlayColor:
+                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorRefPlane:
+                                        //        if (args[1] is int)
+                                        //        {
+                                        //            byte[] rgb = BitConverter.GetBytes((int)args[1]);
+                                        //            Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]);
+
+                                        //            description = new StringBuilder();
+                                        //            description.AppendLine(property.Description);
+                                        //            description.AppendLine("byte[] rgb = BitConverter.GetBytes((int)value)");
+                                        //            description.AppendLine("Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]");
+
+                                        //            property = new GlobalParameterProperty(String.Format("{0} (converted to color)", property.Name), description.ToString(), color, color.GetType(), true);
+
+                                        //            list.Add(new GlobalParameterPropertyDescriptor(ref property, attributes));
+                                        //        }
+                                        //        break;
+                                        //}
                                     }
                                     catch
                                     {

@@ -40,6 +40,7 @@
             this.typeBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.processBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,17 +60,19 @@
             this.objectBrowser = new SolidEdge.Spy.Forms.ObjectBrowser();
             this.tabTypeBrowser = new System.Windows.Forms.TabPage();
             this.typeBrowser = new SolidEdge.Spy.Forms.TypeBrowser();
+            this.tabCommandBrowser = new System.Windows.Forms.TabPage();
+            this.commandBrowser = new SolidEdge.Spy.Forms.CommandBrowser();
             this.tabEventMonitor = new System.Windows.Forms.TabPage();
             this.eventMonitor = new SolidEdge.Spy.Forms.EventMonitor();
             this.tabGlobalParameters = new System.Windows.Forms.TabPage();
             this.globalParameterBrowser = new SolidEdge.Spy.Forms.GlobalParameterBrowser();
             this.tabProcessBrowser = new System.Windows.Forms.TabPage();
             this.processBrowser = new SolidEdge.Spy.Forms.ProcessBrowser();
-            this.processBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabObjectBrowser.SuspendLayout();
             this.tabTypeBrowser.SuspendLayout();
+            this.tabCommandBrowser.SuspendLayout();
             this.tabEventMonitor.SuspendLayout();
             this.tabGlobalParameters.SuspendLayout();
             this.tabProcessBrowser.SuspendLayout();
@@ -159,6 +162,14 @@
             this.globalParametersToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.globalParametersToolStripMenuItem.Text = "&Global Parameters";
             this.globalParametersToolStripMenuItem.Click += new System.EventHandler(this.globalParametersToolStripMenuItem_Click);
+            // 
+            // processBrowserToolStripMenuItem
+            // 
+            this.processBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.ProcessModules_16x16;
+            this.processBrowserToolStripMenuItem.Name = "processBrowserToolStripMenuItem";
+            this.processBrowserToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.processBrowserToolStripMenuItem.Text = "&Process Browser";
+            this.processBrowserToolStripMenuItem.Click += new System.EventHandler(this.processBrowserToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -264,11 +275,13 @@
             this.imageList.Images.SetKeyName(2, "Event_16x16.png");
             this.imageList.Images.SetKeyName(3, "Parameter_16x16.png");
             this.imageList.Images.SetKeyName(4, "ProcessModules_16x16.png");
+            this.imageList.Images.SetKeyName(5, "StartCommand_16x16.png");
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabObjectBrowser);
             this.tabControl.Controls.Add(this.tabTypeBrowser);
+            this.tabControl.Controls.Add(this.tabCommandBrowser);
             this.tabControl.Controls.Add(this.tabEventMonitor);
             this.tabControl.Controls.Add(this.tabGlobalParameters);
             this.tabControl.Controls.Add(this.tabProcessBrowser);
@@ -317,6 +330,27 @@
             this.typeBrowser.Name = "typeBrowser";
             this.typeBrowser.Size = new System.Drawing.Size(776, 488);
             this.typeBrowser.TabIndex = 0;
+            // 
+            // tabCommandBrowser
+            // 
+            this.tabCommandBrowser.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCommandBrowser.Controls.Add(this.commandBrowser);
+            this.tabCommandBrowser.ImageIndex = 5;
+            this.tabCommandBrowser.Location = new System.Drawing.Point(4, 23);
+            this.tabCommandBrowser.Name = "tabCommandBrowser";
+            this.tabCommandBrowser.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCommandBrowser.Size = new System.Drawing.Size(776, 488);
+            this.tabCommandBrowser.TabIndex = 5;
+            this.tabCommandBrowser.Text = "Command Browser";
+            // 
+            // commandBrowser
+            // 
+            this.commandBrowser.ActiveEnvironment = null;
+            this.commandBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commandBrowser.Location = new System.Drawing.Point(3, 3);
+            this.commandBrowser.Name = "commandBrowser";
+            this.commandBrowser.Size = new System.Drawing.Size(770, 482);
+            this.commandBrowser.TabIndex = 0;
             // 
             // tabEventMonitor
             // 
@@ -374,14 +408,6 @@
             this.processBrowser.Size = new System.Drawing.Size(776, 488);
             this.processBrowser.TabIndex = 0;
             // 
-            // processBrowserToolStripMenuItem
-            // 
-            this.processBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.ProcessModules_16x16;
-            this.processBrowserToolStripMenuItem.Name = "processBrowserToolStripMenuItem";
-            this.processBrowserToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.processBrowserToolStripMenuItem.Text = "&Process Browser";
-            this.processBrowserToolStripMenuItem.Click += new System.EventHandler(this.processBrowserToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,6 +428,7 @@
             this.tabControl.ResumeLayout(false);
             this.tabObjectBrowser.ResumeLayout(false);
             this.tabTypeBrowser.ResumeLayout(false);
+            this.tabCommandBrowser.ResumeLayout(false);
             this.tabEventMonitor.ResumeLayout(false);
             this.tabGlobalParameters.ResumeLayout(false);
             this.tabProcessBrowser.ResumeLayout(false);
@@ -448,6 +475,8 @@
         private System.Windows.Forms.TabPage tabProcessBrowser;
         private Forms.ProcessBrowser processBrowser;
         private System.Windows.Forms.ToolStripMenuItem processBrowserToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabCommandBrowser;
+        private Forms.CommandBrowser commandBrowser;
     }
 }
 

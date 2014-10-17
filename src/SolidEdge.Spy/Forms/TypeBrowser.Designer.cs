@@ -174,7 +174,7 @@
             this.buttonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(23, 22);
-            this.buttonRefresh.Text = "toolStripButton1";
+            this.buttonRefresh.Text = "Refresh";
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // toolStripSeparator1
@@ -189,7 +189,7 @@
             this.buttonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(23, 22);
-            this.buttonBack.Text = "toolStripButton1";
+            this.buttonBack.Text = "Back";
             // 
             // buttonForward
             // 
@@ -198,7 +198,7 @@
             this.buttonForward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonForward.Name = "buttonForward";
             this.buttonForward.Size = new System.Drawing.Size(23, 22);
-            this.buttonForward.Text = "toolStripButton2";
+            this.buttonForward.Text = "Forward";
             // 
             // toolStrip2
             // 

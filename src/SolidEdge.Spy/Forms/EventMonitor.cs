@@ -1,4 +1,4 @@
-﻿using SolidEdge.Spy.Extensions;
+﻿//using SolidEdge.Spy.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ using SolidEdge.Spy.Properties;
 
 namespace SolidEdge.Spy.Forms
 {
-    public partial class EventMonitor : UserControl//, SolidEdgeFramework.ISEApplicationEvents
+    public partial class EventMonitor : UserControl
     {
         public const int EventImageIndex = 0;
 
@@ -83,6 +83,13 @@ namespace SolidEdge.Spy.Forms
             listView.SmallImageList.Images.Add(Resources.Event_16x16);
         }
 
+        private void buttonSelectEvents_ButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new SelectEventsDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+            }
+        }
     }
 
     public class EventMonitorItem : ListViewItem

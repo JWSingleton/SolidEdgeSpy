@@ -76,13 +76,13 @@
             this.propertyGrid.TabIndex = 3;
             this.propertyGrid.ToolbarVisible = false;
             // 
-            // GlobalParametersBrowser
+            // GlobalParameterBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.toolStrip);
-            this.Name = "GlobalParametersBrowser";
+            this.Name = "GlobalParameterBrowser";
             this.Size = new System.Drawing.Size(406, 341);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();

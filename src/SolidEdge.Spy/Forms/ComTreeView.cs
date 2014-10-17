@@ -146,6 +146,11 @@ namespace SolidEdge.Spy.Forms
         //    }
         //}
 
+        protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
+        {
+            SelectedNode = e.Node;
+        }
+
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
             if (e.Node.IsVisible == false) return;
@@ -462,28 +467,31 @@ namespace SolidEdge.Spy.Forms
                 {
                     int count = comPtr.TryGetItemCount();
 
+                    //dispatch is System.Collections.IEnumerable
+                    object rcw = null;
+                    
                     try
                     {
                         ComFunctionInfo comFunctionInfo = comTypeInfo.Methods.Where(x => x.Name.Equals("Item", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
-                        if (comFunctionInfo != null)
+                        rcw = comPtr.TryGetUniqueRCW();
+                        var enumerable = rcw as System.Collections.IEnumerable;
+                        var enumerator = enumerable.GetEnumerator();
+
+                        int i = 0;
+
+                        while (enumerator.MoveNext())
                         {
-                            // Solid Edge is supposed to be 1 based index but some collections are 0 based.
-                            // Application->Customization->RibbonBarThemes seems to be 0 based.
-                            for (int i = 0; i <= count; i++)
+                            i++;
+                            var pUnk = Marshal.GetIUnknownForObject(enumerator.Current);
+                            ComPtr pItem = new ComPtr(pUnk);
+
+                            if ((pItem != null) && (pItem.IsInvalid == false))
                             {
-                                object returnValue = null;
-                                if (MarshalEx.Succeeded(comPtr.TryInvokeMethod("Item", new object[] { i }, out returnValue)))
-                                {
-                                    ComPtr pItem = returnValue as ComPtr;
-                                    if ((pItem != null) && (pItem.IsInvalid == false))
-                                    {
-                                        ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode((ComPtr)returnValue, comFunctionInfo);
-                                        comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
-                                        comPtrItemTreeNode.Nodes.Add("...");
-                                        childNodes.Add(comPtrItemTreeNode);
-                                    }
-                                }
+                                ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode(pItem, comFunctionInfo);
+                                comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
+                                comPtrItemTreeNode.Nodes.Add("...");
+                                childNodes.Add(comPtrItemTreeNode);
                             }
                         }
                     }
@@ -491,6 +499,40 @@ namespace SolidEdge.Spy.Forms
                     {
                         GlobalExceptionHandler.HandleException();
                     }
+                    finally
+                    {
+                        Marshal.FinalReleaseComObject(rcw);
+                    }
+
+                    //try
+                    //{
+                    //    ComFunctionInfo comFunctionInfo = comTypeInfo.Methods.Where(x => x.Name.Equals("Item", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+
+                    //    if (comFunctionInfo != null)
+                    //    {
+                    //        // Solid Edge is supposed to be 1 based index but some collections are 0 based.
+                    //        // Application->Customization->RibbonBarThemes seems to be 0 based.
+                    //        for (int i = 0; i <= count; i++)
+                    //        {
+                    //            object returnValue = null;
+                    //            if (MarshalEx.Succeeded(comPtr.TryInvokeMethod("Item", new object[] { i }, out returnValue)))
+                    //            {
+                    //                ComPtr pItem = returnValue as ComPtr;
+                    //                if ((pItem != null) && (pItem.IsInvalid == false))
+                    //                {
+                    //                    ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode((ComPtr)returnValue, comFunctionInfo);
+                    //                    comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
+                    //                    comPtrItemTreeNode.Nodes.Add("...");
+                    //                    childNodes.Add(comPtrItemTreeNode);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //catch
+                    //{
+                    //    GlobalExceptionHandler.HandleException();
+                    //}
                 }
 
                 if (_showMethods)

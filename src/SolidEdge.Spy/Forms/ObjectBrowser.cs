@@ -295,5 +295,37 @@ namespace SolidEdge.Spy.Forms
         {
             comPropertyGrid_SelectedGridItemChanged(comPropertyGrid, new SelectedGridItemChangedEventArgs(null, comPropertyGrid.SelectedGridItem));
         }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            contextMenuStrip.Items.Clear();
+
+            var selectedNode = comTreeView.SelectedNode;
+
+            if (selectedNode != null)
+            {
+                if (selectedNode is ComTreeNode)
+                {
+                    var comTreeNode = selectedNode as ComTreeNode;
+
+                    if (comTreeNode.TypeFullName.Equals(typeof(SolidEdgeFramework.Application).FullName))
+                    {
+                        contextMenuStrip.Items.Add("StartCommand");
+                    }
+                }
+                else if (selectedNode is ComMethodTreeNode)
+                {
+                }
+            }
+
+            if (contextMenuStrip.Items.Count == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void contextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
     }
 }

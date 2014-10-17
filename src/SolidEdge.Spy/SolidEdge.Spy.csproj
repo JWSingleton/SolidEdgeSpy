@@ -79,6 +79,13 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.SolidEdge, Version=107.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Interop.SolidEdge.107.1.0\lib\net40\Interop.SolidEdge.dll</HintPath>
+    </Reference>
+    <Reference Include="SolidEdge.Community">
+      <HintPath>..\packages\SolidEdge.Community.107.1.0\lib\net40\SolidEdge.Community.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -98,6 +105,12 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Forms\CommandBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CommandBrowser.Designer.cs">
+      <DependentUpon>CommandBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ComPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +142,12 @@
     </Compile>
     <Compile Include="Forms\RichTextBoxEx.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectEventsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectEventsDialog.Designer.cs">
+      <DependentUpon>SelectEventsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
@@ -203,6 +222,9 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommandBrowser.resx">
+      <DependentUpon>CommandBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ComPropertyGrid.resx">
       <DependentUpon>ComPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProcessBrowser.resx">
       <DependentUpon>ProcessBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectEventsDialog.resx">
+      <DependentUpon>SelectEventsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TypeBrowser.resx">
       <DependentUpon>TypeBrowser.cs</DependentUpon>
@@ -235,6 +260,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -277,6 +303,7 @@
     <None Include="Media\Find_16x16.png" />
     <None Include="Media\ClearSearch_16x16.png" />
     <None Include="Media\ProcessModules_16x16.png" />
+    <None Include="Media\Start_16x16.png" />
     <Content Include="sespy.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -301,28 +328,14 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="SolidEdgeConstants">
-      <Guid>{C467A6F5-27ED-11D2-BE30-080036B4D502}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="SolidEdgeFramework">
-      <Guid>{8A7EFA3A-F000-11D1-BDFC-080036B4D502}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\SolidEdge.Community.107.1.0\build\net40\SolidEdge.Community.targets" Condition="Exists('..\packages\SolidEdge.Community.107.1.0\build\net40\SolidEdge.Community.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SolidEdge.Community.107.1.0\build\net40\SolidEdge.Community.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SolidEdge.Community.107.1.0\build\net40\SolidEdge.Community.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
