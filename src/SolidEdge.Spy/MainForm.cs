@@ -30,9 +30,10 @@ namespace SolidEdge.Spy
 
         const int TabPageObjectBrowserIndex = 0;
         const int TabPageTypeBrowserIndex = 1;
-        const int TabPageEventMonitorIndex = 2;
-        const int TabPageGlobalParametersIndex = 3;
-        const int TabPageProcessBrowserIndex = 4;
+        const int TabPageCommandBrowserIndex = 2;
+        const int TabPageEventMonitorIndex = 3;
+        const int TabPageGlobalParametersIndex = 4;
+        const int TabPageProcessBrowserIndex = 5;
 
         public MainForm()
         {
@@ -146,11 +147,11 @@ namespace SolidEdge.Spy
             }
         }
 
-        private void samplesForSolidEdgeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void solidEdgeCommunityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Process.Start(Resources.SamplesForSolidEdgeUrl);
+                Process.Start(Resources.GitHubSolidEdgeCommunityUrl);
             }
             catch
             {
@@ -158,11 +159,11 @@ namespace SolidEdge.Spy
             }
         }
 
-        private void interopForSolidEdgeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void githubSamplesForSolidEdgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Process.Start(Resources.InteropForSolidEdgeUrl);
+                Process.Start(Resources.GitHubSamples);
             }
             catch
             {
@@ -170,11 +171,35 @@ namespace SolidEdge.Spy
             }
         }
 
-        private void spyForSolidEdgeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void nugetInteropSolidEdgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Process.Start(Resources.SpyForSolidEdgeUrl);
+                Process.Start(Resources.NuGetInteropSolidEdge);
+            }
+            catch
+            {
+                GlobalExceptionHandler.HandleException();
+            }
+        }
+
+        private void nugetSolidEdgeCommunityToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Resources.NuGetSolidEdgeCommunity);
+            }
+            catch
+            {
+                GlobalExceptionHandler.HandleException();
+            }
+        }
+
+        private void nugetSolidEdgeCommunityReaderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Resources.NuGetSolidEdgeCommunityReader);
             }
             catch
             {
@@ -205,6 +230,11 @@ namespace SolidEdge.Spy
         private void typeBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = TabPageTypeBrowserIndex;
+        }
+
+        private void commandBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = TabPageCommandBrowserIndex;
         }
 
         private void eventMonitorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -261,6 +291,7 @@ namespace SolidEdge.Spy
                     _application = pApplication.TryGetUniqueRCW<SolidEdgeFramework.Application>();
                     _connectionPointController.AdviseSink<SolidEdgeFramework.ISEApplicationEvents>(_application);
 
+                    commandBrowser.ActiveEnvironment = _application.GetActiveEnvironment();
                     globalParameterBrowser.RefreshGlobalParameters();
 
                     objectBrowser.Connect();

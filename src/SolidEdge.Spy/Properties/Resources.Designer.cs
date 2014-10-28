@@ -294,6 +294,16 @@ namespace SolidEdge.Spy.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CommandBrowser_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("CommandBrowser_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ComTreeItemBlue_16x16 {
             get {
                 object obj = ResourceManager.GetObject("ComTreeItemBlue_16x16", resourceCulture);
@@ -412,21 +422,30 @@ namespace SolidEdge.Spy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/SolidEdgeCommunity/Samples.
+        /// </summary>
+        internal static string GitHubSamples {
+            get {
+                return ResourceManager.GetString("GitHubSamples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/solidedgecommunity.
+        /// </summary>
+        internal static string GitHubSolidEdgeCommunityUrl {
+            get {
+                return ResourceManager.GetString("GitHubSolidEdgeCommunityUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Interface_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Interface_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://solidedgeinterop.codeplex.com.
-        /// </summary>
-        internal static string InteropForSolidEdgeUrl {
-            get {
-                return ResourceManager.GetString("InteropForSolidEdgeUrl", resourceCulture);
             }
         }
         
@@ -457,6 +476,33 @@ namespace SolidEdge.Spy.Properties {
             get {
                 object obj = ResourceManager.GetObject("Namespace_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.nuget.org/packages/Interop.SolidEdge.
+        /// </summary>
+        internal static string NuGetInteropSolidEdge {
+            get {
+                return ResourceManager.GetString("NuGetInteropSolidEdge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.nuget.org/packages/SolidEdge.Community.
+        /// </summary>
+        internal static string NuGetSolidEdgeCommunity {
+            get {
+                return ResourceManager.GetString("NuGetSolidEdgeCommunity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.nuget.org/packages/SolidEdge.Community.Reader.
+        /// </summary>
+        internal static string NuGetSolidEdgeCommunityReader {
+            get {
+                return ResourceManager.GetString("NuGetSolidEdgeCommunityReader", resourceCulture);
             }
         }
         
@@ -501,30 +547,12 @@ namespace SolidEdge.Spy.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://solidedgesamples.codeplex.com.
-        /// </summary>
-        internal static string SamplesForSolidEdgeUrl {
-            get {
-                return ResourceManager.GetString("SamplesForSolidEdgeUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap sespy_128x128 {
             get {
                 object obj = ResourceManager.GetObject("sespy_128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://solidedgespy.codeplex.com.
-        /// </summary>
-        internal static string SpyForSolidEdgeUrl {
-            get {
-                return ResourceManager.GetString("SpyForSolidEdgeUrl", resourceCulture);
             }
         }
         

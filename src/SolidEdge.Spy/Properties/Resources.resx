@@ -250,15 +250,6 @@
   <data name="Structure_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Media\Structure_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="InteropForSolidEdgeUrl" xml:space="preserve">
-    <value>http://solidedgeinterop.codeplex.com</value>
-  </data>
-  <data name="SamplesForSolidEdgeUrl" xml:space="preserve">
-    <value>http://solidedgesamples.codeplex.com</value>
-  </data>
-  <data name="SpyForSolidEdgeUrl" xml:space="preserve">
-    <value>http://solidedgespy.codeplex.com</value>
-  </data>
   <data name="Find_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Media\Find_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -270,5 +261,23 @@
   </data>
   <data name="Start_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Media\Start_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GitHubSamples" xml:space="preserve">
+    <value>https://github.com/SolidEdgeCommunity/Samples</value>
+  </data>
+  <data name="GitHubSolidEdgeCommunityUrl" xml:space="preserve">
+    <value>https://github.com/solidedgecommunity</value>
+  </data>
+  <data name="NuGetInteropSolidEdge" xml:space="preserve">
+    <value>https://www.nuget.org/packages/Interop.SolidEdge</value>
+  </data>
+  <data name="NuGetSolidEdgeCommunity" xml:space="preserve">
+    <value>https://www.nuget.org/packages/SolidEdge.Community</value>
+  </data>
+  <data name="NuGetSolidEdgeCommunityReader" xml:space="preserve">
+    <value>https://www.nuget.org/packages/SolidEdge.Community.Reader</value>
+  </data>
+  <data name="CommandBrowser_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Media\CommandBrowser_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

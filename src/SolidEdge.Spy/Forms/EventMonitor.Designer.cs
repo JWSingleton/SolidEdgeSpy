@@ -32,7 +32,6 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonSelectEvents = new System.Windows.Forms.ToolStripSplitButton();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iSEFooEventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonErase = new System.Windows.Forms.ToolStripButton();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
@@ -61,13 +60,13 @@
             // 
             this.buttonSelectEvents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonSelectEvents.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
-            this.iSEFooEventsToolStripMenuItem});
+            this.testToolStripMenuItem});
             this.buttonSelectEvents.Image = global::SolidEdge.Spy.Properties.Resources.Event_16x16;
             this.buttonSelectEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonSelectEvents.Name = "buttonSelectEvents";
             this.buttonSelectEvents.Size = new System.Drawing.Size(32, 22);
             this.buttonSelectEvents.Text = "Events";
+            this.buttonSelectEvents.Visible = false;
             this.buttonSelectEvents.ButtonClick += new System.EventHandler(this.buttonSelectEvents_ButtonClick);
             // 
             // testToolStripMenuItem
@@ -78,16 +77,11 @@
             this.testToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.testToolStripMenuItem.Text = "ISEApplicationEvents";
             // 
-            // iSEFooEventsToolStripMenuItem
-            // 
-            this.iSEFooEventsToolStripMenuItem.Name = "iSEFooEventsToolStripMenuItem";
-            this.iSEFooEventsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.iSEFooEventsToolStripMenuItem.Text = "ISEFooEvents";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Visible = false;
             // 
             // buttonErase
             // 
@@ -171,7 +165,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ToolStripSplitButton buttonSelectEvents;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iSEFooEventsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

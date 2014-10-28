@@ -38,6 +38,7 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typeBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commandBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,10 +48,13 @@
             this.projectWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectForumsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.codePlexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.samplesForSolidEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.interopForSolidEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spyForSolidEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidEdgeCommunityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubSamplesForSolidEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuGetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nugetInteropSolidEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nugetSolidEdgeCommunityToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventMonitorTimer = new System.Windows.Forms.Timer(this.components);
@@ -124,6 +128,7 @@
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.objectBrowserToolStripMenuItem,
             this.typeBrowserToolStripMenuItem,
+            this.commandBrowserToolStripMenuItem,
             this.eventMonitorToolStripMenuItem,
             this.globalParametersToolStripMenuItem,
             this.processBrowserToolStripMenuItem});
@@ -135,7 +140,7 @@
             // 
             this.objectBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.ComTreeItemBlue_16x16;
             this.objectBrowserToolStripMenuItem.Name = "objectBrowserToolStripMenuItem";
-            this.objectBrowserToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.objectBrowserToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.objectBrowserToolStripMenuItem.Text = "&Object Browser";
             this.objectBrowserToolStripMenuItem.Click += new System.EventHandler(this.objectBrowserToolStripMenuItem_Click);
             // 
@@ -143,15 +148,23 @@
             // 
             this.typeBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.Library_16x16;
             this.typeBrowserToolStripMenuItem.Name = "typeBrowserToolStripMenuItem";
-            this.typeBrowserToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.typeBrowserToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.typeBrowserToolStripMenuItem.Text = "&Type Browser";
             this.typeBrowserToolStripMenuItem.Click += new System.EventHandler(this.typeBrowserToolStripMenuItem_Click);
+            // 
+            // commandBrowserToolStripMenuItem
+            // 
+            this.commandBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.CommandBrowser_16x16;
+            this.commandBrowserToolStripMenuItem.Name = "commandBrowserToolStripMenuItem";
+            this.commandBrowserToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.commandBrowserToolStripMenuItem.Text = "Command Browser";
+            this.commandBrowserToolStripMenuItem.Click += new System.EventHandler(this.commandBrowserToolStripMenuItem_Click);
             // 
             // eventMonitorToolStripMenuItem
             // 
             this.eventMonitorToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.Event_16x16;
             this.eventMonitorToolStripMenuItem.Name = "eventMonitorToolStripMenuItem";
-            this.eventMonitorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.eventMonitorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.eventMonitorToolStripMenuItem.Text = "&Event Monitor";
             this.eventMonitorToolStripMenuItem.Click += new System.EventHandler(this.eventMonitorToolStripMenuItem_Click);
             // 
@@ -159,7 +172,7 @@
             // 
             this.globalParametersToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.Parameter_16x16;
             this.globalParametersToolStripMenuItem.Name = "globalParametersToolStripMenuItem";
-            this.globalParametersToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.globalParametersToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.globalParametersToolStripMenuItem.Text = "&Global Parameters";
             this.globalParametersToolStripMenuItem.Click += new System.EventHandler(this.globalParametersToolStripMenuItem_Click);
             // 
@@ -167,7 +180,7 @@
             // 
             this.processBrowserToolStripMenuItem.Image = global::SolidEdge.Spy.Properties.Resources.ProcessModules_16x16;
             this.processBrowserToolStripMenuItem.Name = "processBrowserToolStripMenuItem";
-            this.processBrowserToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.processBrowserToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.processBrowserToolStripMenuItem.Text = "&Process Browser";
             this.processBrowserToolStripMenuItem.Click += new System.EventHandler(this.processBrowserToolStripMenuItem_Click);
             // 
@@ -179,7 +192,8 @@
             this.projectWebsiteToolStripMenuItem,
             this.projectForumsToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.codePlexToolStripMenuItem,
+            this.githubToolStripMenuItem,
+            this.nuGetToolStripMenuItem,
             this.toolStripMenuItem3,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -217,36 +231,59 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 6);
             // 
-            // codePlexToolStripMenuItem
+            // githubToolStripMenuItem
             // 
-            this.codePlexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.samplesForSolidEdgeToolStripMenuItem,
-            this.interopForSolidEdgeToolStripMenuItem,
-            this.spyForSolidEdgeToolStripMenuItem});
-            this.codePlexToolStripMenuItem.Name = "codePlexToolStripMenuItem";
-            this.codePlexToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.codePlexToolStripMenuItem.Text = "&CodePlex";
+            this.githubToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidEdgeCommunityToolStripMenuItem,
+            this.githubSamplesForSolidEdgeToolStripMenuItem});
+            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.githubToolStripMenuItem.Text = "&GitHub";
             // 
-            // samplesForSolidEdgeToolStripMenuItem
+            // solidEdgeCommunityToolStripMenuItem
             // 
-            this.samplesForSolidEdgeToolStripMenuItem.Name = "samplesForSolidEdgeToolStripMenuItem";
-            this.samplesForSolidEdgeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.samplesForSolidEdgeToolStripMenuItem.Text = "Samples for Solid Edge";
-            this.samplesForSolidEdgeToolStripMenuItem.Click += new System.EventHandler(this.samplesForSolidEdgeToolStripMenuItem_Click);
+            this.solidEdgeCommunityToolStripMenuItem.Name = "solidEdgeCommunityToolStripMenuItem";
+            this.solidEdgeCommunityToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.solidEdgeCommunityToolStripMenuItem.Text = "Solid Edge Community";
+            this.solidEdgeCommunityToolStripMenuItem.Click += new System.EventHandler(this.solidEdgeCommunityToolStripMenuItem_Click);
             // 
-            // interopForSolidEdgeToolStripMenuItem
+            // githubSamplesForSolidEdgeToolStripMenuItem
             // 
-            this.interopForSolidEdgeToolStripMenuItem.Name = "interopForSolidEdgeToolStripMenuItem";
-            this.interopForSolidEdgeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.interopForSolidEdgeToolStripMenuItem.Text = "Interop for Solid Edge";
-            this.interopForSolidEdgeToolStripMenuItem.Click += new System.EventHandler(this.interopForSolidEdgeToolStripMenuItem_Click);
+            this.githubSamplesForSolidEdgeToolStripMenuItem.Name = "githubSamplesForSolidEdgeToolStripMenuItem";
+            this.githubSamplesForSolidEdgeToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.githubSamplesForSolidEdgeToolStripMenuItem.Text = "Samples";
+            this.githubSamplesForSolidEdgeToolStripMenuItem.Click += new System.EventHandler(this.githubSamplesForSolidEdgeToolStripMenuItem_Click);
             // 
-            // spyForSolidEdgeToolStripMenuItem
+            // nuGetToolStripMenuItem
             // 
-            this.spyForSolidEdgeToolStripMenuItem.Name = "spyForSolidEdgeToolStripMenuItem";
-            this.spyForSolidEdgeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.spyForSolidEdgeToolStripMenuItem.Text = "Spy for Solid Edge";
-            this.spyForSolidEdgeToolStripMenuItem.Click += new System.EventHandler(this.spyForSolidEdgeToolStripMenuItem_Click);
+            this.nuGetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nugetInteropSolidEdgeToolStripMenuItem,
+            this.nugetSolidEdgeCommunityToolStripMenuItem1,
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem});
+            this.nuGetToolStripMenuItem.Name = "nuGetToolStripMenuItem";
+            this.nuGetToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.nuGetToolStripMenuItem.Text = "&NuGet";
+            // 
+            // nugetInteropSolidEdgeToolStripMenuItem
+            // 
+            this.nugetInteropSolidEdgeToolStripMenuItem.Name = "nugetInteropSolidEdgeToolStripMenuItem";
+            this.nugetInteropSolidEdgeToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.nugetInteropSolidEdgeToolStripMenuItem.Text = "Interop.SolidEdge Package";
+            this.nugetInteropSolidEdgeToolStripMenuItem.Click += new System.EventHandler(this.nugetInteropSolidEdgeToolStripMenuItem_Click);
+            // 
+            // nugetSolidEdgeCommunityToolStripMenuItem1
+            // 
+            this.nugetSolidEdgeCommunityToolStripMenuItem1.Name = "nugetSolidEdgeCommunityToolStripMenuItem1";
+            this.nugetSolidEdgeCommunityToolStripMenuItem1.Size = new System.Drawing.Size(279, 22);
+            this.nugetSolidEdgeCommunityToolStripMenuItem1.Text = "SolidEdge.Community Package";
+            this.nugetSolidEdgeCommunityToolStripMenuItem1.Click += new System.EventHandler(this.nugetSolidEdgeCommunityToolStripMenuItem1_Click);
+            // 
+            // nugetSolidEdgeCommunityReaderToolStripMenuItem
+            // 
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem.Name = "nugetSolidEdgeCommunityReaderToolStripMenuItem";
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem.Text = "SolidEdge.Community.Reader Package";
+            this.nugetSolidEdgeCommunityReaderToolStripMenuItem.Click += new System.EventHandler(this.nugetSolidEdgeCommunityReaderToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -275,7 +312,7 @@
             this.imageList.Images.SetKeyName(2, "Event_16x16.png");
             this.imageList.Images.SetKeyName(3, "Parameter_16x16.png");
             this.imageList.Images.SetKeyName(4, "ProcessModules_16x16.png");
-            this.imageList.Images.SetKeyName(5, "StartCommand_16x16.png");
+            this.imageList.Images.SetKeyName(5, "CommandBrowser_16x16.png");
             // 
             // tabControl
             // 
@@ -338,7 +375,6 @@
             this.tabCommandBrowser.ImageIndex = 5;
             this.tabCommandBrowser.Location = new System.Drawing.Point(4, 23);
             this.tabCommandBrowser.Name = "tabCommandBrowser";
-            this.tabCommandBrowser.Padding = new System.Windows.Forms.Padding(3);
             this.tabCommandBrowser.Size = new System.Drawing.Size(776, 488);
             this.tabCommandBrowser.TabIndex = 5;
             this.tabCommandBrowser.Text = "Command Browser";
@@ -347,9 +383,9 @@
             // 
             this.commandBrowser.ActiveEnvironment = null;
             this.commandBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.commandBrowser.Location = new System.Drawing.Point(3, 3);
+            this.commandBrowser.Location = new System.Drawing.Point(0, 0);
             this.commandBrowser.Name = "commandBrowser";
-            this.commandBrowser.Size = new System.Drawing.Size(770, 482);
+            this.commandBrowser.Size = new System.Drawing.Size(776, 488);
             this.commandBrowser.TabIndex = 0;
             // 
             // tabEventMonitor
@@ -467,16 +503,20 @@
         private System.Windows.Forms.ToolStripMenuItem typeBrowserToolStripMenuItem;
         private Forms.TypeBrowser typeBrowser;
         private Forms.GlobalParameterBrowser globalParameterBrowser;
-        private System.Windows.Forms.ToolStripMenuItem codePlexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem samplesForSolidEdgeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem interopForSolidEdgeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spyForSolidEdgeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem githubSamplesForSolidEdgeToolStripMenuItem;
         private System.Windows.Forms.TabPage tabProcessBrowser;
         private Forms.ProcessBrowser processBrowser;
         private System.Windows.Forms.ToolStripMenuItem processBrowserToolStripMenuItem;
         private System.Windows.Forms.TabPage tabCommandBrowser;
         private Forms.CommandBrowser commandBrowser;
+        private System.Windows.Forms.ToolStripMenuItem solidEdgeCommunityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nuGetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nugetInteropSolidEdgeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nugetSolidEdgeCommunityToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem nugetSolidEdgeCommunityReaderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem commandBrowserToolStripMenuItem;
     }
 }
 

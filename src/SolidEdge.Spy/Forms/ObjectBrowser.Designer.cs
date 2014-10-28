@@ -40,10 +40,9 @@
             this.buttonMethods = new System.Windows.Forms.ToolStripButton();
             this.separatorNavigation = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainerInner = new System.Windows.Forms.SplitContainer();
-            this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.comTreeView = new SolidEdge.Spy.Forms.ComTreeView();
             this.typeInfoRichTextBox = new SolidEdge.Spy.Forms.TypeInfoRichTextBox();
+            this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
             this.comPropertyGrid = new SolidEdge.Spy.Forms.ComPropertyGrid();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerInner)).BeginInit();
@@ -163,34 +162,9 @@
             this.splitContainerInner.SplitterDistance = 207;
             this.splitContainerInner.TabIndex = 2;
             // 
-            // splitContainerOuter
-            // 
-            this.splitContainerOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerOuter.Location = new System.Drawing.Point(0, 25);
-            this.splitContainerOuter.Name = "splitContainerOuter";
-            // 
-            // splitContainerOuter.Panel1
-            // 
-            this.splitContainerOuter.Panel1.Controls.Add(this.splitContainerInner);
-            // 
-            // splitContainerOuter.Panel2
-            // 
-            this.splitContainerOuter.Panel2.Controls.Add(this.comPropertyGrid);
-            this.splitContainerOuter.Size = new System.Drawing.Size(414, 329);
-            this.splitContainerOuter.SplitterDistance = 242;
-            this.splitContainerOuter.TabIndex = 3;
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(153, 26);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
-            this.contextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_ItemClicked);
-            // 
             // comTreeView
             // 
             this.comTreeView.BackColor = System.Drawing.SystemColors.Window;
-            this.comTreeView.ContextMenuStrip = this.contextMenuStrip;
             this.comTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
             this.comTreeView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -225,6 +199,23 @@
             this.typeInfoRichTextBox.TabIndex = 0;
             this.typeInfoRichTextBox.Text = "";
             this.typeInfoRichTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.typeInfoRichTextBox_LinkClicked);
+            // 
+            // splitContainerOuter
+            // 
+            this.splitContainerOuter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerOuter.Location = new System.Drawing.Point(0, 25);
+            this.splitContainerOuter.Name = "splitContainerOuter";
+            // 
+            // splitContainerOuter.Panel1
+            // 
+            this.splitContainerOuter.Panel1.Controls.Add(this.splitContainerInner);
+            // 
+            // splitContainerOuter.Panel2
+            // 
+            this.splitContainerOuter.Panel2.Controls.Add(this.comPropertyGrid);
+            this.splitContainerOuter.Size = new System.Drawing.Size(414, 329);
+            this.splitContainerOuter.SplitterDistance = 242;
+            this.splitContainerOuter.TabIndex = 3;
             // 
             // comPropertyGrid
             // 
@@ -277,6 +268,5 @@
         private ComPropertyGrid comPropertyGrid;
         private System.Windows.Forms.ToolStripButton buttonProperties;
         private System.Windows.Forms.ToolStripButton buttonMethods;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }

@@ -29,8 +29,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>2.1.0.1</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.2.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -304,6 +304,7 @@
     <None Include="Media\ClearSearch_16x16.png" />
     <None Include="Media\ProcessModules_16x16.png" />
     <None Include="Media\Start_16x16.png" />
+    <None Include="Media\CommandBrowser_16x16.png" />
     <Content Include="sespy.ico" />
   </ItemGroup>
   <ItemGroup>
