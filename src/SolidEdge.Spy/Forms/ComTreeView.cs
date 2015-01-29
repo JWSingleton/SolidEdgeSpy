@@ -465,33 +465,58 @@ namespace SolidEdge.Spy.Forms
 
                 if (comPtr.TryIsCollection())
                 {
+                    List<ComTreeNode> collectionChildNodes = new List<ComTreeNode>();
                     int count = comPtr.TryGetItemCount();
+                    int foundCount = 0;
 
-                    //dispatch is System.Collections.IEnumerable
-                    object rcw = null;
-                    
                     try
                     {
                         ComFunctionInfo comFunctionInfo = comTypeInfo.Methods.Where(x => x.Name.Equals("Item", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
-                        rcw = comPtr.TryGetUniqueRCW();
-                        var enumerable = rcw as System.Collections.IEnumerable;
-                        var enumerator = enumerable.GetEnumerator();
-
-                        int i = 0;
-
-                        while (enumerator.MoveNext())
+                        if (comFunctionInfo != null)
                         {
-                            i++;
-                            var pUnk = Marshal.GetIUnknownForObject(enumerator.Current);
-                            ComPtr pItem = new ComPtr(pUnk);
+                            object returnValue = null;
 
-                            if ((pItem != null) && (pItem.IsInvalid == false))
+                            // Solid Edge is supposed to be 1 based index.
+                            for (int i = 1; i <= count; i++)
                             {
-                                ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode(pItem, comFunctionInfo);
-                                comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
-                                comPtrItemTreeNode.Nodes.Add("...");
-                                childNodes.Add(comPtrItemTreeNode);
+                                returnValue = null;
+                                if (MarshalEx.Succeeded(comPtr.TryInvokeMethod("Item", new object[] { i }, out returnValue)))
+                                {
+                                    ComPtr pItem = returnValue as ComPtr;
+                                    if ((pItem != null) && (pItem.IsInvalid == false))
+                                    {
+                                        ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode((ComPtr)returnValue, comFunctionInfo);
+                                        comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
+                                        comPtrItemTreeNode.Nodes.Add("...");
+                                        collectionChildNodes.Add(comPtrItemTreeNode);
+                                        foundCount++;
+                                    }
+                                }
+                            }
+
+                            try
+                            {
+                                // Some collections are 0 based.
+                                // Application->Customization->RibbonBarThemes seems to be 0 based.
+                                if (foundCount == (count - 1))
+                                {
+                                    returnValue = null;
+                                    if (MarshalEx.Succeeded(comPtr.TryInvokeMethod("Item", new object[] { 0 }, out returnValue)))
+                                    {
+                                        ComPtr pItem = returnValue as ComPtr;
+                                        if ((pItem != null) && (pItem.IsInvalid == false))
+                                        {
+                                            ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode((ComPtr)returnValue, comFunctionInfo);
+                                            comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, 0);
+                                            comPtrItemTreeNode.Nodes.Add("...");
+                                            collectionChildNodes.Insert(0, comPtrItemTreeNode);
+                                        }
+                                    }
+                                }
+                            }
+                            catch
+                            {
                             }
                         }
                     }
@@ -499,40 +524,8 @@ namespace SolidEdge.Spy.Forms
                     {
                         GlobalExceptionHandler.HandleException();
                     }
-                    finally
-                    {
-                        Marshal.FinalReleaseComObject(rcw);
-                    }
 
-                    //try
-                    //{
-                    //    ComFunctionInfo comFunctionInfo = comTypeInfo.Methods.Where(x => x.Name.Equals("Item", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-
-                    //    if (comFunctionInfo != null)
-                    //    {
-                    //        // Solid Edge is supposed to be 1 based index but some collections are 0 based.
-                    //        // Application->Customization->RibbonBarThemes seems to be 0 based.
-                    //        for (int i = 0; i <= count; i++)
-                    //        {
-                    //            object returnValue = null;
-                    //            if (MarshalEx.Succeeded(comPtr.TryInvokeMethod("Item", new object[] { i }, out returnValue)))
-                    //            {
-                    //                ComPtr pItem = returnValue as ComPtr;
-                    //                if ((pItem != null) && (pItem.IsInvalid == false))
-                    //                {
-                    //                    ComPtrItemTreeNode comPtrItemTreeNode = new ComPtrItemTreeNode((ComPtr)returnValue, comFunctionInfo);
-                    //                    comPtrItemTreeNode.Caption = String.Format("{0}({1})", comFunctionInfo.Name, i);
-                    //                    comPtrItemTreeNode.Nodes.Add("...");
-                    //                    childNodes.Add(comPtrItemTreeNode);
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                    //catch
-                    //{
-                    //    GlobalExceptionHandler.HandleException();
-                    //}
+                    childNodes.AddRange(collectionChildNodes.ToArray());
                 }
 
                 if (_showMethods)
