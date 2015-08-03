@@ -11,21 +11,35 @@ namespace SolidEdge.Spy.Forms
     public class ToolStripSpringTextBox : ToolStripTextBox
     {
         public event EventHandler TextAccepted;
+        private string _inactiveText;
 
         public ToolStripSpringTextBox()
         {
-            this.Text = "<Search>";
+            this.Text = InactiveText;
+        }
+
+        public override string Text
+        {
+            get
+            {
+                if (base.Text.Equals(InactiveText))
+                {
+                    return String.Empty;
+                }
+
+                return base.Text;
+            }
+            set
+            {
+                base.Text = value;
+            }
         }
 
         protected override void OnGotFocus(EventArgs e)
         {
-            if (this.Text.Equals("<Search>"))
+            if (base.Text.Equals(InactiveText))
             {
-                this.Text = String.Empty;
-            }
-            else if (this.Text.Equals("<Filter>"))
-            {
-                this.Text = String.Empty;
+                base.Text = String.Empty;
             }
 
             base.OnGotFocus(e);
@@ -50,7 +64,7 @@ namespace SolidEdge.Spy.Forms
         {
             if (String.IsNullOrWhiteSpace(this.Text))
             {
-                this.Text = "<Search>";
+                this.Text = InactiveText;
             }
 
             base.OnLostFocus(e);
@@ -64,7 +78,7 @@ namespace SolidEdge.Spy.Forms
             {
                 if (String.IsNullOrEmpty(this.Text))
                 {
-                    this.Text = "<Search>";
+                    this.Text = InactiveText;
                 }
             }
         }
@@ -129,6 +143,16 @@ namespace SolidEdge.Spy.Forms
             Size size = base.GetPreferredSize(constrainingSize);
             size.Width = width;
             return size;
+        }
+
+        public string InactiveText
+        {
+            get { return _inactiveText; }
+            set
+            {
+                _inactiveText = value;
+                Text = _inactiveText;
+            }
         }
     }
 }

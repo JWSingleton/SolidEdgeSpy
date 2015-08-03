@@ -33,6 +33,7 @@
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.textBoxSearch = new SolidEdge.Spy.Forms.ToolStripSpringTextBox();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +50,8 @@
             this.toolStrip.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buttonRefresh});
+            this.buttonRefresh,
+            this.textBoxSearch});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(406, 25);
@@ -65,6 +67,15 @@
             this.buttonRefresh.Size = new System.Drawing.Size(23, 22);
             this.buttonRefresh.Text = "Refresh";
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.InactiveText = "<Filter>";
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.textBoxSearch.Size = new System.Drawing.Size(100, 25);
+            this.textBoxSearch.Text = "<Filter>";
+            this.textBoxSearch.TextAccepted += new System.EventHandler(this.textBoxSearch_TextAccepted);
             // 
             // propertyGrid
             // 
@@ -97,5 +108,6 @@
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton buttonRefresh;
         private System.Windows.Forms.PropertyGrid propertyGrid;
+        private ToolStripSpringTextBox textBoxSearch;
     }
 }

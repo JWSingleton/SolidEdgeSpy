@@ -12,12 +12,12 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <NuGetPackageImportStamp>8e26a765</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>30ed2075</NuGetPackageImportStamp>
     <PublishUrl>C:\deploy\solidedgespy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
+    <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
@@ -31,7 +31,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.4.0.0</ApplicationVersion>
+    <ApplicationVersion>2.5.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -81,13 +81,13 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.SolidEdge, Version=107.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Interop.SolidEdge, Version=108.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Interop.SolidEdge.107.3.0\lib\net40\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\packages\Interop.SolidEdge.108.0.0\lib\net40\Interop.SolidEdge.dll</HintPath>
     </Reference>
-    <Reference Include="SolidEdge.Community, Version=107.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SolidEdge.Community, Version=108.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SolidEdge.Community.107.3.1\lib\net40\SolidEdge.Community.dll</HintPath>
+      <HintPath>..\packages\SolidEdge.Community.108.0.0\lib\net40\SolidEdge.Community.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -308,6 +308,12 @@
     <None Include="Media\ProcessModules_16x16.png" />
     <None Include="Media\Start_16x16.png" />
     <None Include="Media\CommandBrowser_16x16.png" />
+    <None Include="Media\ComTreeItemMethod_16x16.png" />
+    <None Include="Media\EventMonitor_16x16.png" />
+    <None Include="Media\GlobalParameters_16x16.png" />
+    <None Include="Media\ObjectBrowser_16x16.png" />
+    <None Include="Media\ProcessBrowser_16x16.png" />
+    <None Include="Media\TypeBrowser_16x16.png" />
     <Content Include="sespy.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -333,13 +339,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\SolidEdge.Community.107.3.1\build\net40\SolidEdge.Community.targets" Condition="Exists('..\packages\SolidEdge.Community.107.3.1\build\net40\SolidEdge.Community.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\SolidEdge.Community.107.3.1\build\net40\SolidEdge.Community.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SolidEdge.Community.107.3.1\build\net40\SolidEdge.Community.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

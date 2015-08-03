@@ -215,10 +215,10 @@
             // 
             // textBoxSearch
             // 
+            this.textBoxSearch.InactiveText = "<Search>";
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.textBoxSearch.Size = new System.Drawing.Size(100, 25);
-            this.textBoxSearch.Text = "<Search>";
             this.textBoxSearch.TextAccepted += new System.EventHandler(this.textBoxSearch_TextAccepted);
             // 
             // buttonSearch

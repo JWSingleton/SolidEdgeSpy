@@ -27,13 +27,20 @@ namespace SolidEdge.Spy.Forms
             Cursor.Current = Cursors.Default;
         }
 
+        private void textBoxSearch_TextAccepted(object sender, EventArgs e)
+        {
+            buttonRefresh_Click(sender, e);
+        }
+
         public void RefreshGlobalParameters()
         {
             ComPtr pApplication = IntPtr.Zero;
+
             if (MarshalEx.Succeeded(MarshalEx.GetActiveObject("SolidEdge.Application", out pApplication)))
             {
-                SelectedObject = new GlobalParameterInfo(pApplication);
+                SelectedObject = new GlobalParameterInfo(pApplication, this.textBoxSearch.Text);
             }
+
         }
 
         public object SelectedObject
@@ -42,6 +49,7 @@ namespace SolidEdge.Spy.Forms
             set
             {
                 GlobalParameterInfo globalParameterInfo = propertyGrid.SelectedObject as GlobalParameterInfo;
+
                 if (globalParameterInfo != null)
                 {
                     globalParameterInfo.Dispose();
@@ -56,10 +64,12 @@ namespace SolidEdge.Spy.Forms
     {
         private ComPtr _pApplication = IntPtr.Zero;
         private List<SolidEdgeFramework.ApplicationGlobalConstants> _colorGlobalConstants = new List<SolidEdgeFramework.ApplicationGlobalConstants>();
+        private string _filter;
 
-        public GlobalParameterInfo(ComPtr pApplication)
+        public GlobalParameterInfo(ComPtr pApplication, string filter)
         {
             _pApplication = pApplication;
+            _filter = filter;
 
             try
             {
@@ -113,7 +123,22 @@ namespace SolidEdge.Spy.Forms
 
                     foreach (ComVariableInfo variableInfo in enumInfo.Variables)
                     {
+                        if (String.IsNullOrEmpty(_filter) == false)
+                        {
+                            if (variableInfo.Name.IndexOf(_filter, StringComparison.OrdinalIgnoreCase) == -1)
+                            {
+                                continue;
+                            }
+                        }
+
                         SolidEdgeFramework.ApplicationGlobalConstants globalConst = (SolidEdgeFramework.ApplicationGlobalConstants)variableInfo.ConstantValue;
+
+                        // There is a known bug where seApplicationGlobalOpenAsReadOnly3DFile causes SE to display the read-only icon on
+                        // files after GetGlobalParameter() is called. 
+                        if (globalConst.Equals(SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalOpenAsReadOnly3DFile))
+                        {
+                            continue;
+                        }
 
                         try
                         {
@@ -170,43 +195,6 @@ namespace SolidEdge.Spy.Forms
                                                 list.Add(new GlobalParameterPropertyDescriptor(ref property, attributes));
                                             }
                                         }
-
-                                        //switch (globalConst)
-                                        //{
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionEdge:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionCenterline:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionRegion:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorLiveSectionOpacity:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab1:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheetTab2:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorActive:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorBackground:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorConstruction:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorDisabled:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorFailed:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHandle:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorHighlight:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorProfile:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSelected:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorSheet:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalOverlayColor:
-                                        //    case SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalColorRefPlane:
-                                        //        if (args[1] is int)
-                                        //        {
-                                        //            byte[] rgb = BitConverter.GetBytes((int)args[1]);
-                                        //            Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]);
-
-                                        //            description = new StringBuilder();
-                                        //            description.AppendLine(property.Description);
-                                        //            description.AppendLine("byte[] rgb = BitConverter.GetBytes((int)value)");
-                                        //            description.AppendLine("Color color = Color.FromArgb(255, rgb[0], rgb[1], rgb[2]");
-
-                                        //            property = new GlobalParameterProperty(String.Format("{0} (converted to color)", property.Name), description.ToString(), color, color.GetType(), true);
-
-                                        //            list.Add(new GlobalParameterPropertyDescriptor(ref property, attributes));
-                                        //        }
-                                        //        break;
-                                        //}
                                     }
                                     catch
                                     {
