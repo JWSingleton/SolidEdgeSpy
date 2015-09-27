@@ -296,7 +296,14 @@ namespace SolidEdge.Spy
 
                     objectBrowser.Connect();
 
-                    processBrowser.ProcessId = _application.ProcessID;
+                    // Older versions of Solid Edge don't have the ProcessID property.
+                    try
+                    {
+                        processBrowser.ProcessId = _application.ProcessID;
+                    }
+                    catch
+                    {
+                    }
 
                     return true;
                 }
